@@ -16,9 +16,12 @@ export default function About() {
           <div className="flex items-center justify-between w-full">
             
             {/* Left - Name */}
+            <Link href="/">
             <div className="text-lg font-medium text-gray-800">
-              Shagufta Zabin
+              {/* Shagufta Zabin */}
+              <Image src="/logo.png" alt="Shagufta Zabin" width={100} height={100} />
             </div>
+            </Link>
 
             {/* Center - Links */}
             <div className="flex space-x-8">

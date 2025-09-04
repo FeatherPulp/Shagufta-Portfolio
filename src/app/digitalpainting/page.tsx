@@ -43,9 +43,12 @@ export default function DigitalPainting() {
       <nav className="flex justify-center pt-8 px-12">
         <div className="bg-[#F9DBC1] rounded-full px-8 py-2 border border-[#C5A588] w-full max-w-screen-lg">
           <div className="flex items-center justify-between w-full">
+             <Link href="/">
             <div className="text-lg font-medium text-gray-800">
-              Shagufta Zabin
+              {/* Shagufta Zabin */}
+              <Image src="/logo.png" alt="Shagufta Zabin" width={100} height={100} />
             </div>
+            </Link>
             <div className="flex space-x-8">
               <Link
                 href="/"

@@ -12,9 +12,10 @@ export default function Contact() {
           <div className="flex items-center justify-between w-full">
             
             {/* Left - Name */}
-            <Link href="/">
-            <div className="text-lg cursor-pointer font-medium text-gray-800">
-              Shagufta Zabin
+             <Link href="/">
+            <div className="text-lg font-medium text-gray-800">
+              {/* Shagufta Zabin */}
+              <Image src="/logo.png" alt="Shagufta Zabin" width={100} height={100} />
             </div>
             </Link>
 
