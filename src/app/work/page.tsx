@@ -40,7 +40,7 @@ gsap.registerPlugin(ScrollTrigger);
   };
   
 
-
+const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 
  // Navigation function to handle view changes consistently
@@ -487,19 +487,22 @@ const goToImage = (index: number) => {
   const MainView = () => (
     <div className="min-h-screen  bg-[url('/page1bg.png')]">
       {/* Navbar */}
-      <nav className="flex justify-center pt-8 px-12">
-  <div className="bg-[#F9DBC1] rounded-full px-8 py-2 border border-[#C5A588] w-full max-w-screen-lg">
+     <nav className="flex justify-center pt-4 md:pt-8 px-4 md:px-12 relative">
+  <div className="bg-[#F9DBC1] rounded-full px-4 md:px-8 py-2 border border-[#C5A588] w-full max-w-screen-lg">
     <div className="flex items-center justify-between w-full">
+      
+      {/* Left - Logo */}
       <Link href="/">
-            <div className="text-lg font-medium text-gray-800">
-              {/* Shagufta Zabin */}
-              <Image src="/logo.png" alt="Shagufta Zabin" width={100} height={100} />
-            </div>
-            </Link>
-      <div className="flex space-x-8">
+        <div className="text-lg font-medium text-gray-800">
+          <Image src="/logo.png" alt="Shagufta Zabin" width={80} height={80}/>
+        </div>
+      </Link>
+
+      {/* Center - Links */}
+      <div className="flex space-x-4 xl:space-x-8 hidden lg:flex">
         <button 
           onClick={() => handleNavigation('home')}
-          className={`px-4 py-2 rounded-full transition-all duration-300 cursor-pointer transform hover:scale-105 inline-block ${
+          className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
             currentView === 'home' 
               ? 'bg-white text-gray-800 shadow-sm' 
               : 'text-gray-600 hover:bg-white'
@@ -509,8 +512,8 @@ const goToImage = (index: number) => {
         </button>
         <button 
           onClick={() => handleNavigation('main')}
-          className={`px-4 py-2 rounded-full transition-all duration-300 cursor-pointer transform hover:scale-105 inline-block ${
-            currentView === 'main' || currentView === 'detail' 
+          className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
+            currentView === 'main' || currentView === 'detail'
               ? 'bg-white text-gray-800 shadow-sm' 
               : 'text-gray-600 hover:bg-white'
           }`}
@@ -519,8 +522,8 @@ const goToImage = (index: number) => {
         </button>
         <button 
           onClick={() => handleNavigation('digitalpainting')}
-          className={`px-4 py-2 rounded-full transition-all cursor-pointer duration-300 transform hover:scale-105 inline-block ${
-            currentView === 'digitalpainting' 
+          className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
+            currentView === 'digitalpainting'
               ? 'bg-white text-gray-800 shadow-sm' 
               : 'text-gray-600 hover:bg-white'
           }`}
@@ -528,10 +531,12 @@ const goToImage = (index: number) => {
           Digital Paintings
         </button>
       </div>
-      <div className="flex space-x-8">
+
+      {/* Right - Links */}
+      <div className="flex space-x-4 xl:space-x-8 hidden lg:flex">
         <button 
           onClick={() => handleNavigation('about')}
-          className={`px-4 py-2 rounded-full transition-all duration-300 cursor-pointer transform hover:scale-105 inline-block ${
+          className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
             currentView === 'about' 
               ? 'bg-white text-gray-800 shadow-sm' 
               : 'text-gray-600 hover:bg-white'
@@ -541,7 +546,7 @@ const goToImage = (index: number) => {
         </button>
         <button 
           onClick={() => handleNavigation('contact')}
-          className={`px-4 py-2 rounded-full transition-all duration-300 transform cursor-pointer hover:scale-105 inline-block ${
+          className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
             currentView === 'contact' 
               ? 'bg-white text-gray-800 shadow-sm' 
               : 'text-gray-600 hover:bg-white'
@@ -550,18 +555,60 @@ const goToImage = (index: number) => {
           Contact
         </button>
       </div>
+
+      {/* Mobile menu button */}
+      <div className="lg:hidden">
+        <button 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="text-gray-600 hover:bg-white px-3 py-2 rounded-full transition-colors"
+        >
+          {isMobileMenuOpen ? (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
+      </div>
     </div>
   </div>
+
+  {/* Mobile Menu Dropdown */}
+  {isMobileMenuOpen && (
+    <div className="absolute top-full left-4 right-4 mt-2 bg-[#F9DBC1] rounded-2xl border border-[#C5A588] shadow-lg z-50 lg:hidden">
+      <div className="py-4 px-6 space-y-2">
+        {['home','main','digitalpainting','about','contact'].map((view) => (
+          <button
+            key={view}
+            onClick={() => {
+              handleNavigation(view)
+              setIsMobileMenuOpen(false)
+            }}
+            className={`block w-full text-gray-600 hover:bg-white px-4 py-3 rounded-full transition-all duration-300 text-center ${
+              currentView === view ? 'bg-white text-gray-800 shadow-sm' : ''
+            }`}
+          >
+            {view === 'main' ? 'Work' : 
+             view.charAt(0).toUpperCase() + view.slice(1)}
+          </button>
+        ))}
+      </div>
+    </div>
+  )}
 </nav>
 
+
       {/* Work Content */}
-      <div className="max-w-7xl mx-auto px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-16">
         {/* Tabs */}
         <div className="flex justify-start mb-12">
-          <div className="flex space-x-8">
+          <div className="flex flex-wrap gap-4 md:gap-8 justify-center md:justify-start">
             <button
               onClick={() => setActiveTab('product')}
-              className={`text-lg font-medium transition-all duration-300 cursor-pointer ${
+              className={`text-base md:text-lg font-medium transition-all duration-300 cursor-pointer ${
                 activeTab === 'product'
                   ? 'text-gray-800 border-b-2 border-gray-800 pb-1'
                   : 'text-gray-500 hover:text-gray-700'
@@ -583,13 +630,13 @@ const goToImage = (index: number) => {
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {activeTab === 'product' && (
             <>
               {/* First Project */}
               <div className="relative">
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-800">
+                <div className="p-4 md:p-6">
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-800">
                     {productDesignProjects[0].title}
                   </h3>
                   <h3 className='text-xl font-semibold text-gray-800 mb-4'>{productDesignProjects[0].title1}</h3>
@@ -613,7 +660,7 @@ const goToImage = (index: number) => {
                   
                   <button 
                     onClick={() => openProjectDetail(productDesignProjects[0])}
-                    className="bg-[#F9DBC1] w-[200px] text-gray-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-[#F0C89B] transition-colors duration-300"
+                    className="bg-[#F9DBC1] w-full md:w-[200px] text-gray-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-[#F0C89B] transition-colors duration-300"
                   >
                     View Case Study
                   </button>
@@ -621,32 +668,32 @@ const goToImage = (index: number) => {
               </div>
 
               {/* First Project Image */}
-              <div className="relative">
+              <div className="relative hidden lg:block">
                 <div className="relative">
                   <Image
                   width={600}
                   height={600}
                     src={productDesignProjects[0].image}
                     alt={productDesignProjects[0].title}
-                    className="w-full h-80 object-cover rounded-lg shadow-lg"
+                    className="w-full h-48 md:h-60 lg:h-80 object-cover rounded-lg shadow-lg"
                   />
                 </div>
               </div>
 
               {/* Second Project - Reversed */}
-              <div className="relative mt-12">
-                <div className="relative">
+              <div className="relative lg:mt-12 hidden lg:block ">
+                <div className="relative ">
                   <Image
                   width={600}
                   height={600}
                     src={productDesignProjects[1].image}
                     alt={productDesignProjects[1].title}
-                    className="w-full h-80 object-cover rounded-lg shadow-lg"
+                    className="w-full h-48 md:h-60 lg:h-80 object-cover rounded-lg shadow-lg "
                   />
                 </div>
               </div>
 
-              <div className="relative mt-12 flex justify-center">
+              <div className="relative lg:mt-12 flex justify-center">
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800">
                     {productDesignProjects[1].title}
@@ -672,7 +719,7 @@ const goToImage = (index: number) => {
                   
                   <button 
                     onClick={() => openProjectDetail(productDesignProjects[1])}
-                    className="bg-[#F9DBC1] w-[200px] text-gray-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-[#F0C89B] transition-colors duration-300"
+                    className="bg-[#F9DBC1] w-full md:w-[200px] text-gray-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-[#F0C89B] transition-colors duration-300"
                   >
                     View Case Study
                   </button>
@@ -680,7 +727,7 @@ const goToImage = (index: number) => {
               </div>
 
                 {/* third Project */}
-              <div className="relative mt-12">
+              <div className="relative lg:mt-12">
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800">
                     {productDesignProjects[2].title}
@@ -706,7 +753,7 @@ const goToImage = (index: number) => {
                   
                   <button 
                     onClick={() => openProjectDetail(productDesignProjects[2])}
-                    className="bg-[#F9DBC1] w-[200px] text-gray-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-[#F0C89B] transition-colors duration-300"
+                    className="bg-[#F9DBC1] w-full md:w-[200px] text-gray-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-[#F0C89B] transition-colors duration-300"
                   >
                     View Case Study
                   </button>
@@ -714,32 +761,32 @@ const goToImage = (index: number) => {
               </div>
 
               {/* third Project Image */}
-              <div className="relative mt-12">
+              <div className="relative lg:mt-12 hidden lg:block">
                 <div className="relative">
                   <Image
                   width={600}
                   height={600}
                     src={productDesignProjects[2].image}
                     alt={productDesignProjects[2].title}
-                    className="w-full h-80 object-cover rounded-lg shadow-lg"
+                    className="w-full h-48 md:h-60 lg:h-80 object-cover rounded-lg shadow-lg"
                   />
                 </div>
               </div>
 
                {/* fourth Project - Reversed */}
-              <div className="relative mt-12">
-                <div className="relative">
+              <div className="relative lg:mt-12 hidden lg:block">
+                <div className="relative ">
                   <Image
                   width={600}
                   height={600}
                     src={productDesignProjects[3].image}
                     alt={productDesignProjects[3].title}
-                    className="w-full h-80 object-cover rounded-lg shadow-lg"
+                   className="w-full h-48 md:h-60 lg:h-80 object-cover rounded-lg shadow-lg"
                   />
                 </div>
               </div>
 
-              <div className="relative mt-12 flex justify-center">
+              <div className="relative lg:mt-12 flex justify-center">
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800">
                     {productDesignProjects[3].title}
@@ -765,61 +812,14 @@ const goToImage = (index: number) => {
                   
                   <button 
                     onClick={() => openProjectDetail(productDesignProjects[3])}
-                    className="bg-[#F9DBC1] w-[200px] text-gray-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-[#F0C89B] transition-colors duration-300"
+                    className="bg-[#F9DBC1] w-full md:w-[200px] text-gray-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-[#F0C89B] transition-colors duration-300"
                   >
                     View Case Study
                   </button>
                 </div>
               </div>
 
-                {/* fifth Project */}
-              {/* <div className="relative mt-12">
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    {productDesignProjects[4].title}
-                  </h3>
-                  <h3 className='text-xl font-semibold text-gray-800 mb-4'>{productDesignProjects[4].title1}</h3>
-                  
-                  <div className="space-y-3 mb-6">
-                    <div>
-                      <span className="text-sm font-medium text-gray-600">Role: </span>
-                      <span className="text-sm text-gray-800">{productDesignProjects[4].role}</span>
-                    </div>
-                    
-                    <div>
-                      <span className="text-sm font-medium text-gray-600">Challenge: </span>
-                      <span className="text-sm text-gray-800">{productDesignProjects[4].challenge}</span>
-                    </div>
-                    
-                    <div>
-                      <span className="text-sm font-medium text-gray-600">Solution: </span>
-                      <span className="text-sm text-gray-800">{productDesignProjects[4].solution}</span>
-                    </div>
-                  </div>
-                  
-                  <button 
-                    onClick={() => openProjectDetail(productDesignProjects[4])}
-                    className="bg-[#F9DBC1] w-[200px] text-gray-800 px-6 py-2 rounded-full text-sm font-medium hover:bg-[#F0C89B] transition-colors duration-300"
-                  >
-                    View Case Study
-                  </button>
-                </div>
-              </div> */}
-
-              {/* fifth Project Image */}
-              {/* <div className="relative mt-12">
-                <div className="relative">
-                  <img
-                    src={productDesignProjects[4].image}
-                    alt={productDesignProjects[4].title}
-                    className="w-full h-80 object-cover rounded-lg shadow-lg"
-                  />
-                </div>
-              </div> */}
-
-              
-    
-
+               
 
             </>
           )}
@@ -828,10 +828,10 @@ const goToImage = (index: number) => {
   <div className="col-span-2">
     {/* Tabs */}
     <div className="flex justify-center mb-12">
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-3 md:gap-4 justify-center">
         <button
           onClick={() => setGraphicActiveTab('social')}
-          className={`px-6 py-3 cursor-pointer rounded-full border border-[#C5A588] text-sm font-medium transition-all duration-300 ${
+          className={`px-4 md:px-6 py-2 md:py-3 cursor-pointer rounded-full border border-[#C5A588] text-xs md:text-sm font-medium transition-all duration-300 ${
             graphicActiveTab === 'social'
               ? 'bg-[#F9DBC1] text-gray-800'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -841,7 +841,7 @@ const goToImage = (index: number) => {
         </button>
         <button
           onClick={() => setGraphicActiveTab('ebook')}
-          className={`px-6 py-3 cursor-pointer rounded-full border border-[#C5A588] text-sm font-medium transition-all duration-300 ${
+          className={`px-4 md:px-6 py-2 md:py-3 cursor-pointer rounded-full border border-[#C5A588] text-xs md:text-sm font-medium transition-all duration-300 ${
             graphicActiveTab === 'ebook'
               ? 'bg-[#F9DBC1] text-gray-800'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -874,10 +874,10 @@ const goToImage = (index: number) => {
 
     {/* Content Section */}
     <div className="text-center mb-12">
-      <h2 className="text-3xl font-bold text-gray-800 mb-4">
+      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-4">
         {graphicDesignData[graphicActiveTab].title}
       </h2>
-      <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+      <p className="text-sm md:text-base lg:text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed px-4 md:px-0">
         {graphicDesignData[graphicActiveTab].subtitle}
       </p>
     </div>
@@ -907,7 +907,7 @@ const goToImage = (index: number) => {
           <>
             <button
               onClick={prevImage}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all duration-300"
+              className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-1.5 md:p-2 shadow-lg transition-all duration-300"
             >
               <ChevronLeft className="w-5 h-5 text-gray-800" />
             </button>
@@ -1397,55 +1397,54 @@ const goToImage = (index: number) => {
     <div>
       {currentView === 'main' && <MainView />}
       {currentView === 'detail' && selectedProject && <ProjectDetailView project={selectedProject} />}
-              <footer className="bg-[#6B6158] px-8 py-12">
-                      <div className="max-w-6xl mx-auto">
-                        {/* Copyright */}
-                        <div className="mb-8">
-                          <p className="text-white text-sm">© 2025 Shagufta Zabin</p>
-                        </div>
-              
-                        {/* Navigation Links */}
-                        <nav className="flex flex-wrap gap-6 mb-6">
-                          <Link href="#" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-4 py-2 rounded-full">
-                            Home
-                          </Link>
-                          <Link href="/work" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-4 py-2 rounded-full">
-                            Work
-                          </Link>
-                          <Link href="/digitalpainting" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-4 py-2 rounded-full">
-                            Digital Paintings
-                          </Link>
-                          <Link href="/about" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-4 py-2 rounded-full">
-                            About
-                          </Link>
-                          <Link href="/contact" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-4 py-2 rounded-full">
-                            Contact
-                          </Link>
-                        </nav>
-              
-                        {/* Social Media Icons */}
-                        <div className="flex gap-3">
-                         <a
-  href="https://www.instagram.com/hasrat_hues?igsh=MWk2M2tuN2U0bDR0OA%3D%3D&utm_source=qr"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-[#E1306C] p-2 rounded-sm hover:bg-opacity-80 transition-colors duration-200"
->
-  <Instagram size={20} color="white" />
-</a>
+                <footer className="bg-[#6B6158] px-4 md:px-8 py-8 md:py-12">
+  <div className="max-w-6xl mx-auto">
+    {/* Copyright */}
+    <div className="mb-6 md:mb-8">
+      <p className="text-white text-sm">© 2025 Shagufta Zabin</p>
+    </div>
 
-                                           <a
-  href="https://www.linkedin.com/in/shagufta-zabin"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-[#0077B5] p-2 rounded-sm hover:bg-opacity-80 transition-colors duration-200"
+    {/* Navigation Links */}
+    <nav className="flex flex-wrap gap-3 md:gap-6 mb-6 justify-center md:justify-start">
+      <Link href="#" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-3 md:px-4 py-2 rounded-full text-sm md:text-base">
+        Home
+      </Link>
+      <Link href="/work" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-3 md:px-4 py-2 rounded-full text-sm md:text-base">
+        Work
+      </Link>
+      <Link href="/digitalpainting" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-3 md:px-4 py-2 rounded-full text-sm md:text-base">
+        Digital Paintings
+      </Link>
+      <Link href="/about" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-3 md:px-4 py-2 rounded-full text-sm md:text-base">
+        About
+      </Link>
+      <Link href="/contact" className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-3 md:px-4 py-2 rounded-full text-sm md:text-base">
+        Contact
+      </Link>
+    </nav>
 
->
-  <Linkedin size={20} color="white" />
-</a>
-                        </div>
-                      </div>
-                    </footer>
+    {/* Social Media Icons */}
+    <div className="flex gap-3 justify-center md:justify-start">
+      <a
+        href="https://www.instagram.com/hasrat_hues?igsh=MWk2M2tuN2U0bDR0OA%3D%3D&utm_source=qr"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-[#E1306C] p-2 rounded-sm hover:bg-opacity-80 transition-colors duration-200"
+      >
+        <Instagram size={20} color="white" />
+      </a>
+      <a
+      
+        href="https://www.linkedin.com/in/shagufta-zabin"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-[#0077B5] p-2 rounded-sm hover:bg-opacity-80 transition-colors duration-200"
+      >
+        <Linkedin size={20} color="white" />
+      </a>
+    </div>
+  </div>
+</footer>
 
     </div>
   );
