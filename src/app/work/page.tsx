@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowLeft, Instagram } from "lucide-react";
 import { Linkedin } from "lucide-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -21,6 +21,16 @@ export default function Work() {
   const [graphicActiveTab, setGraphicActiveTab] =
     useState<GraphicTabType>("social");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10); // if scrolled more than 10px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   gsap.registerPlugin(ScrollToPlugin);
   gsap.registerPlugin(ScrollTrigger);
@@ -514,7 +524,11 @@ export default function Work() {
   const MainView = () => (
     <div className="min-h-screen  bg-[url('/page1bg.png')]">
       {/* Navbar */}
-      <nav className="flex justify-center pt-4 md:pt-8 px-4 md:px-12 relative sticky top-0 z-50">
+      <nav
+        className={`flex justify-center px-4 md:px-12 sticky top-0 z-50 transition-all duration-300 ease-in-out ${
+          scrolled ? "pt-0" : "pt-4 md:pt-8"
+        }`}
+      >
         <div className="bg-[#F9DBC1] rounded-full px-4 md:px-8 py-2 border border-[#C5A588] w-full max-w-screen-lg">
           <div className="flex items-center justify-between w-full">
             {/* Left - Logo */}

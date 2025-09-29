@@ -1,17 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Contact() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10); // if scrolled more than 10px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[url('/page1bg.png')]">
       {/* Navigation */}
-      <nav className="flex justify-center pt-4 md:pt-8 px-4 md:px-12 relative">
+      <nav
+        className={`flex justify-center px-4 md:px-12 sticky top-0 z-50 transition-all duration-300 ease-in-out ${
+          scrolled ? "pt-0 md:pt-0" : "pt-4 md:pt-8"
+        }`}
+      >
         <div className="bg-[#F9DBC1] rounded-full px-4 md:px-8 py-2 border border-[#C5A588] w-full max-w-screen-lg">
           <div className="flex items-center justify-between w-full">
             {/* Left - Name */}
