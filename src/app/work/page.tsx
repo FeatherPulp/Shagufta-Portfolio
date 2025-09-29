@@ -176,7 +176,7 @@ export default function Work() {
         tldrpt1:
           "I redesigned RevUp into a developer-first platform with one clear goal — to make API testing feel instant and effortless.",
         tldrpt2:
-          "  What started as a cluttered and manual tool evolved into a smooth, intuitive experience. Every interaction was rethought to give developers more control and less friction. The product now <br />speaks through simplicity, speed, and flow.",
+          "  What started as a cluttered and manual tool evolved into a smooth, intuitive experience. Every interaction was rethought to give developers more control and less friction. The product now speaks through simplicity, speed, and flow.",
       },
       video: {
         video: "/revupvideo.mp4",
@@ -187,7 +187,7 @@ export default function Work() {
     {
       id: 2,
       title: "Swalekh Pad – Writing Without Language Barriers",
-      title1: "for Developers",
+      title1: "",
       role: "Sole Product Designer",
       challenge: " Fonts in Indian scripts were inconsistent and unreadable.",
       solution:
@@ -514,7 +514,7 @@ export default function Work() {
   const MainView = () => (
     <div className="min-h-screen  bg-[url('/page1bg.png')]">
       {/* Navbar */}
-      <nav className="flex justify-center pt-4 md:pt-8 px-4 md:px-12 relative">
+      <nav className="flex justify-center pt-4 md:pt-8 px-4 md:px-12 relative sticky top-0 z-50">
         <div className="bg-[#F9DBC1] rounded-full px-4 md:px-8 py-2 border border-[#C5A588] w-full max-w-screen-lg">
           <div className="flex items-center justify-between w-full">
             {/* Left - Logo */}
@@ -533,7 +533,7 @@ export default function Work() {
             <div className="flex space-x-4 xl:space-x-8 hidden lg:flex">
               <button
                 onClick={() => handleNavigation("home")}
-                className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
+                className={`px-2 xl:px-4 py-2 cursor-pointer rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
                   currentView === "home"
                     ? "bg-white text-gray-800 shadow-sm"
                     : "text-gray-600 hover:bg-white"
@@ -543,7 +543,7 @@ export default function Work() {
               </button>
               <button
                 onClick={() => handleNavigation("main")}
-                className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
+                className={`px-2 xl:px-4 py-2 cursor-pointer rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
                   currentView === "main" || currentView === "detail"
                     ? "bg-white text-gray-800 shadow-sm"
                     : "text-gray-600 hover:bg-white"
@@ -553,7 +553,7 @@ export default function Work() {
               </button>
               <button
                 onClick={() => handleNavigation("digitalpainting")}
-                className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
+                className={`px-2 xl:px-4 py-2 cursor-pointer rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
                   currentView === "digitalpainting"
                     ? "bg-white text-gray-800 shadow-sm"
                     : "text-gray-600 hover:bg-white"
@@ -564,10 +564,10 @@ export default function Work() {
             </div>
 
             {/* Right - Links */}
-            <div className="flex space-x-4 xl:space-x-8 hidden lg:flex">
+            <div className="flex space-x-4 xl:space-x-8 cursor-pointer hidden lg:flex">
               <button
                 onClick={() => handleNavigation("about")}
-                className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
+                className={`px-2 xl:px-4 py-2 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
                   currentView === "about"
                     ? "bg-white text-gray-800 shadow-sm"
                     : "text-gray-600 hover:bg-white"
@@ -577,7 +577,7 @@ export default function Work() {
               </button>
               <button
                 onClick={() => handleNavigation("contact")}
-                className={`px-2 xl:px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
+                className={`px-2 xl:px-4 py-2 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-105 inline-block text-sm xl:text-base ${
                   currentView === "contact"
                     ? "bg-white text-gray-800 shadow-sm"
                     : "text-gray-600 hover:bg-white"
@@ -1685,7 +1685,7 @@ export default function Work() {
           {/* Navigation Links */}
           <nav className="flex flex-wrap gap-3 md:gap-6 mb-6 justify-center md:justify-start">
             <Link
-              href="#"
+              href="/"
               className="text-white hover:text-[#363444] transition-colors duration-200 hover:bg-white bg-opacity-20 px-3 md:px-4 py-2 rounded-full text-sm md:text-base"
             >
               Home
