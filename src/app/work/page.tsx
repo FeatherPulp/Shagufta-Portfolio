@@ -1095,12 +1095,21 @@ export default function Work() {
       {/* Hero Section with Red Background */}
       <div className="bg-[url('/page1bg.png')]">
         {/* Navbar */}
-        <nav className="flex justify-center pt-8 px-12">
+        <nav
+          className={`flex justify-center px-4 md:px-12 sticky top-0 z-50 transition-all duration-300 ease-in-out ${
+            scrolled ? "pt-0 md:pt-0" : "pt-4 md:pt-8"
+          }`}
+        >
           <div className="bg-[#F9DBC1] rounded-full px-8 py-2 border border-[#C5A588] w-full max-w-screen-lg">
             <div className="flex items-center justify-between w-full">
               <Link href="/">
-                <div className="text-lg font-medium text-gray-800 cursor-pointer">
-                  Shagufta Zabin
+                <div className="text-lg font-medium text-gray-800">
+                  <Image
+                    src="/logo.png"
+                    alt="Shagufta Zabin"
+                    width={80}
+                    height={80}
+                  />
                 </div>
               </Link>
               <div className="flex space-x-8">
