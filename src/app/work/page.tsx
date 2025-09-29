@@ -1093,65 +1093,67 @@ export default function Work() {
   }) => (
     <div className="min-h-screen bg-[#FCFCFC] ">
       {/* Hero Section with Red Background */}
-      <div className="bg-[url('/page1bg.png')]">
-        {/* Navbar */}
-        <nav
-          className={`flex justify-center px-4 md:px-12 sticky top-0 z-50 transition-all duration-300 ease-in-out ${
-            scrolled ? "pt-0 md:pt-0" : "pt-4 md:pt-8"
-          }`}
-        >
-          <div className="bg-[#F9DBC1] rounded-full px-8 py-2 border border-[#C5A588] w-full max-w-screen-lg">
-            <div className="flex items-center justify-between w-full">
-              <Link href="/">
-                <div className="text-lg font-medium text-gray-800">
-                  <Image
-                    src="/logo.png"
-                    alt="Shagufta Zabin"
-                    width={80}
-                    height={80}
-                  />
-                </div>
+      <nav
+        className={`flex justify-center px-4 md:px-12 sticky top-0 z-50 transition-all duration-300 ease-in-out ${
+          scrolled
+            ? "pt-0 md:pt-0 bg-transparent "
+            : "pt-4 md:pt-8 bg-[url('/page1bg.png')] bg-cover"
+        }`}
+      >
+        <div className="bg-[#F9DBC1] rounded-full px-8 py-2 border border-[#C5A588] w-full max-w-screen-lg">
+          <div className="flex items-center justify-between w-full">
+            <Link href="/">
+              <div className="text-lg font-medium text-gray-800">
+                <Image
+                  src="/logo.png"
+                  alt="Shagufta Zabin"
+                  width={80}
+                  height={80}
+                />
+              </div>
+            </Link>
+            <div className="flex space-x-8">
+              <Link
+                href="/"
+                className="text-gray-600 cursor-pointer hover:bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
+              >
+                Home
               </Link>
-              <div className="flex space-x-8">
-                <Link
-                  href="/"
-                  className="text-gray-600 cursor-pointer hover:bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
-                >
-                  Home
-                </Link>
-                <button
-                  onClick={() => setCurrentView("main")}
-                  className="text-gray-600 hover:bg-white cursor-pointer bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
-                >
-                  Work
-                </button>
-                <Link
-                  href="/digitalpainting"
-                  className="text-gray-600 cursor-pointer hover:bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
-                >
-                  Digital Paintings
-                </Link>
-              </div>
-              <div className="flex space-x-8">
-                <Link
-                  href="/about"
-                  className="text-gray-600 cursor-pointer hover:bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
-                >
-                  About
-                </Link>
-                <Link
-                  href="/contact"
-                  className="text-gray-600 cursor-pointer hover:bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
-                >
-                  Contact
-                </Link>
-              </div>
+              <button
+                onClick={() => setCurrentView("main")}
+                className="text-gray-600 hover:bg-white cursor-pointer bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
+              >
+                Work
+              </button>
+              <Link
+                href="/digitalpainting"
+                className="text-gray-600 cursor-pointer hover:bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
+              >
+                Digital Paintings
+              </Link>
+            </div>
+            <div className="flex space-x-8">
+              <Link
+                href="/about"
+                className="text-gray-600 cursor-pointer hover:bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
+              >
+                About
+              </Link>
+              <Link
+                href="/contact"
+                className="text-gray-600 cursor-pointer hover:bg-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
+              >
+                Contact
+              </Link>
             </div>
           </div>
-        </nav>
+        </div>
+      </nav>
+      <div className="bg-[url('/page1bg.png')]">
+        {/* Navbar */}
 
         {/* Project Detail Content */}
-        <div className="max-w-7xl mx-auto px-8 pb-16 mt-4 ">
+        <div className="max-w-7xl mx-auto px-8 pb-16  ">
           {/* Breadcrumb */}
           <div
             className="mb-8 cursor-pointer"
